@@ -10,25 +10,21 @@ function Display ({value}) {
     )
 }
 
-class Button extends React.Component {
-  handleClick = () => {
-    this.props.clickHandler(this.props.name)
-  }
+function Button ({name, orange, wide, clickHandler}) {
+  const handleClick = () => {clickHandler(name)}
 
-  render() {
-    const className = [
-      'component-button',
-      this.props.orange ? 'orange' : '',
-      this.props.wide ? 'wide' : '',
-    ]
-
+  const className = [
+    'component-button',
+    orange ? 'orange' : '',
+    wide ? 'wide' : '',
+  ]
     return (
       <div className={className.join(' ').trim()}>
-        <button onClick={this.handleClick}>{this.props.name}</button>
+        <button onClick={handleClick}>{name}</button>
       </div>
     )
-  }
 }
+
 class ButtonPanel extends React.Component {
   handleClick = buttonName => {
     this.props.clickHandler(buttonName)
