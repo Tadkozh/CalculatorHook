@@ -1,0 +1,19 @@
+Calculatrice iOS
+
+*****************************************************
+👨‍✈️ Hugo, the project manager, is giving us some time for a technical migration. 
+In this exercise we are going to do a Class to Hook migration of an IOS calculator application.
+*****************************************************
+
+COMPONENTS
+
+- App
+  - Display
+  - ButtonPanel 
+    - Button
+
+FUNCTIONS
+
+- calculate
+- isNumber
+- operate
