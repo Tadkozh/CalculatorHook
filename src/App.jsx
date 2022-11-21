@@ -25,7 +25,7 @@ function Button ({name, orange, wide, clickHandler}) {
     )
 }
 
-function ButtonPanel (clickHandler) {
+function ButtonPanel ({clickHandler}) {
   const handleClick = buttonName => {clickHandler(buttonName)}  
     return (
       <div className="component-button-panel">
@@ -62,23 +62,30 @@ function ButtonPanel (clickHandler) {
     )
 }
 
-export default class App extends React.Component {
-  state = {
-    total: null,
-    next: null,
-    operation: null,
+export default function App () {
+
+  const [total, setTotal] = React.useState(null)
+  const [next, setNext] = React.useState(null)
+  const [operation, setOperation] = React.useState(null)
+
+  const handleClick = buttonName => {
+    const objCalc = calculate({total, next, operation}, buttonName)
+
+    if (objCalc.total !== undefined) {
+      setTotal(objCalc.total)
+    }
+    if (objCalc.next !== undefined) {
+      setNext(objCalc.next)
+    }
+    if (objCalc.operation !== undefined) {
+      setOperation(objCalc.operation)
+    }
   }
 
-  handleClick = buttonName => {
-    this.setState(calculate(this.state, buttonName))
-  }
-
-  render() {
-    return (
-      <div className="component-app">
-        <Display value={this.state.next || this.state.total || '0'} />
-        <ButtonPanel clickHandler={this.handleClick} />
-      </div>
-    )
-  }
+  return (
+    <div className="component-app">
+      <Display value={next || total || '0'} />
+      <ButtonPanel clickHandler={handleClick} />
+    </div>
+  )
 }
