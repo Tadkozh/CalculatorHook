@@ -2,15 +2,14 @@ import React from 'react'
 import calculate from './functions/calculate'
 import './App.css'
 
-class Display extends React.Component {
-  render() {
+function Display ({value}) {
     return (
       <div className="component-display">
-        <div>{this.props.value}</div>
+        <div>{value}</div>
       </div>
     )
-  }
 }
+
 class Button extends React.Component {
   handleClick = () => {
     this.props.clickHandler(this.props.name)
