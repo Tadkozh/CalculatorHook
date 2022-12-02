@@ -1,33 +1,27 @@
 import React from 'react'
+import { useReducer } from 'react'
 import calculate from './functions/calculate'
 import './App.css'
 
 import Display from "./components/Display";
 import ButtonPanel from "./components/ButtonPanel";
 
-export default function App () {
+const reducer = (state, action) => ({...state, ...action})
 
-  const [total, setTotal] = React.useState(null)
-  const [next, setNext] = React.useState(null)
-  const [operation, setOperation] = React.useState(null)
+export default function App() {
+  const [state, setState] = useReducer(reducer, {
+    total: null,
+    next: null,
+    operation: null,
+  })
 
   const handleClick = buttonName => {
-    const objCalc = calculate({total, next, operation}, buttonName)
-
-    if (objCalc.total !== undefined) {
-      setTotal(objCalc.total)
-    }
-    if (objCalc.next !== undefined) {
-      setNext(objCalc.next)
-    }
-    if (objCalc.operation !== undefined) {
-      setOperation(objCalc.operation)
-    }
+    setState(calculate(state, buttonName))
   }
 
   return (
     <div className="component-app">
-      <Display value={next || total || '0'} />
+      <Display value={state.next || state.total || '0'} />
       <ButtonPanel clickHandler={handleClick} />
     </div>
   )
